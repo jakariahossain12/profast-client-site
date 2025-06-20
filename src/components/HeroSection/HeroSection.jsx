@@ -12,7 +12,8 @@ const HeroSection = () => {
         autoPlay={true}
         infiniteLoop={true}
         showThumbs={false}
-        showArrows={false}
+            showArrows={false}
+            className=' overflow-hidden rounded-4xl'
       >
         <div>
           <img src={banner1} />

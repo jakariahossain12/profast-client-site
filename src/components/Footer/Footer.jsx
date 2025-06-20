@@ -3,7 +3,7 @@ import WebsiteLogo from '../../share/WebsiteLogo/WebsiteLogo';
 
 const Footer = () => {
     return (
-      <footer className="footer footer-horizontal footer-center bg-black text-primary-content p-10 rounded-lg">
+      <footer className=" my-10 footer footer-horizontal footer-center bg-black text-primary-content p-10 rounded-3xl">
         <aside>
           <WebsiteLogo></WebsiteLogo>
           <p className="font-bold">
