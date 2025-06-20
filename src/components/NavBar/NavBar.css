@@ -1,0 +1,10 @@
+.active{
+    background-color: #CAEB66;
+}
+ul>li{
+    font-weight: 500;
+    
+}
+ul>li:hover{
+    background-color: #CAEB66;
+}
