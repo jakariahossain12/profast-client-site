@@ -4,6 +4,7 @@ import authImage from '../assets/authImage.png'
 import { FcGoogle } from "react-icons/fc";
 import WebsiteLogo from '../share/WebsiteLogo/WebsiteLogo';
 import { Outlet } from 'react-router';
+import { ToastContainer } from "react-toastify";
 
 const AuthLayOut = () => {
     return (
@@ -21,6 +22,7 @@ const AuthLayOut = () => {
             />
           </div>
         </div>
+        <ToastContainer/>
       </div>
     );
 };
