@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import WebsiteLogo from '../../share/WebsiteLogo/WebsiteLogo';
 import { FiArrowUpRight } from "react-icons/fi";
 import './NavBar.css'
@@ -64,7 +64,7 @@ const NavBar = () => {
           <ul className="menu menu-horizontal px-1">{link}</ul>
         </div>
         <div className="navbar-end flex gap-3">
-          <a className="btn">Sign In</a>
+          <Link className="btn" to={'/sign-in'}>Sign In</Link>
           <a className="btn bg-primary">Be a rider</a>
           <div className='bg-black w-9 h-9 rounded-full flex justify-center items-center'>
             <FiArrowUpRight  className='text-lime-300 text-3xl'></FiArrowUpRight>

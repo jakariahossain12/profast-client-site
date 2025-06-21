@@ -66,9 +66,9 @@ const CoverageMap = () => {
   // -------------------------------------------------
 
   return (
-    <div className="rounded-4xl bg-white p-10 shadow-2xs">
+    <div className="rounded-4xl bg-white px-0 py-4 md:p-4 shadow-2xs">
       {/* // Container that holds the full-height map */}
-      <div className="h-[600px] w-5/6 mx-auto mb-20">
+      <div className="h-[600px] w-11/12 mx-auto mb-20">
         {/* ----------- NEW SEARCH FORM ----------- */}
         <form onSubmit={handleSearch} className="mb-3">
           <input
