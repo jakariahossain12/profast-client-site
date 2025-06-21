@@ -7,5 +7,12 @@
   default: true;
   --color-primary: #CAEB66;
   --color-accent:#03373D;
+  --color-background:#F0F3F6;
   --color-secondary: teal;
+}
+
+body{
+  background-color: #F0F3F6;
+  margin: 0;
+  padding: 0;
 }

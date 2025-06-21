@@ -7,31 +7,29 @@ const NavBar = () => {
     const link = (
       <>
         <li>
-          <NavLink to={'/'}>Home</NavLink>
+          <NavLink to={"/"}>Home</NavLink>
         </li>
         <li>
-          <NavLink to={'/services'}>Services</NavLink>
+          <NavLink to={"/services"}>Services</NavLink>
         </li>
         <li>
-          <NavLink to={'/coverage'}>Coverage</NavLink>
+          <NavLink to={"/coverage-map"}>Coverage</NavLink>
         </li>
         <li>
-          <NavLink to={'/about-us'}>About Us</NavLink>
+          <NavLink to={"/about-us"}>About Us</NavLink>
         </li>
 
         <li>
-          <NavLink to={'/pricing'}>Pricing</NavLink>
+          <NavLink to={"/pricing"}>Pricing</NavLink>
         </li>
 
         <li>
-          <NavLink to={'/be-a-rider'}>Be a Rider</NavLink>
+          <NavLink to={"/be-a-rider"}>Be a Rider</NavLink>
         </li>
-
-        
       </>
     );
     return (
-      <div className="navbar bg-base-100 shadow-sm rounded-md my-5">
+      <div className="navbar bg-base-100 shadow-sm rounded-md mb-5 ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
