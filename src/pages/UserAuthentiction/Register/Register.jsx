@@ -4,9 +4,15 @@ import WebsiteLogo from '../../../share/WebsiteLogo/WebsiteLogo';
 import AuthButton from '../../../share/AuthButton/AuthButton';
 import { Link } from 'react-router';
 
+
 const Register = () => {
+
+  
+
+
     const handle = (e) => {
-        e.preventDefault()
+      e.preventDefault()
+      
     }
     return (
       <div className="md:w-1/2 flex flex-col justify-center items-center px-8 md:px-24 py-12 bg-white">
