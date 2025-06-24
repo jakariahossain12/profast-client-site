@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { imageUrl } from "../../../api/utiles";
 
 const Register = () => {
-  const { newUser } = useAuth();
+  const { newUser, userProfileUpdate } = useAuth();
   const notify = () => toast.success("Account Create Successfully");
   const [image, setImage] = useState(null);
   const {
@@ -23,6 +23,7 @@ const Register = () => {
     console.log(data);
     newUser(data?.email, data?.password)
       .then((res) => {
+        userProfileUpdate(data?.name,image)
         console.log(res);
         notify();
         reset();
