@@ -5,9 +5,13 @@ import { useLoaderData } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddParcelForm = () => {
   const serviceCenters = useLoaderData();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -143,15 +147,27 @@ const AddParcelForm = () => {
           paymentStatus: "unpaid",
           deliveryStatus: "pending",
           creation_date: new Date().toISOString(),
+          user_email: user.email,
         };
 
         console.log("Saved Parcel:", newParcel);
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: "Parcel info saved.",
-        });
-        reset();
+
+        axiosSecure
+          .post("parcels", newParcel)
+          .then((res) => {
+            if (res?.data?.insertedId) {
+              toast.success("parcel add successfully");
+              Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Parcel info saved.",
+              });
+              reset();
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     });
   };
