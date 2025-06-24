@@ -5,13 +5,13 @@ import LoadingSpiner from '../components/LoadingSpine/LoadingSpiner';
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    if (!user) {
-        return <Navigate to={'/sign-in'}></Navigate>
-    }
+    
     if (loading) {
         return <LoadingSpiner></LoadingSpiner>
     }
-    
+    if (!user) {
+      return <Navigate to={"/sign-in"}></Navigate>;
+    }
 
 
     return (

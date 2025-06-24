@@ -20,7 +20,7 @@ const NavBar = () => {
         </li>
 
         <li>
-          <NavLink to={"/pricing"}>Pricing</NavLink>
+          <NavLink to={"/add-parcel"}>Pricing</NavLink>
         </li>
 
         <li>
@@ -56,9 +56,9 @@ const NavBar = () => {
               {link}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">
+          
             <WebsiteLogo></WebsiteLogo>
-          </a>
+          
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{link}</ul>
