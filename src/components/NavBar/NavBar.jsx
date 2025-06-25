@@ -3,7 +3,9 @@ import { Link, NavLink } from 'react-router';
 import WebsiteLogo from '../../share/WebsiteLogo/WebsiteLogo';
 import { FiArrowUpRight } from "react-icons/fi";
 import './NavBar.css'
+import useAuth from '../../hooks/useAuth';
 const NavBar = () => {
+  const { user } = useAuth();
     const link = (
       <>
         <li>
@@ -26,6 +28,11 @@ const NavBar = () => {
         <li>
           <NavLink to={"/be-a-rider"}>Be a Rider</NavLink>
         </li>
+        {user && (
+          <li>
+            <NavLink to={"/dashboard"}>DashBoard</NavLink>
+          </li>
+        )}
       </>
     );
     return (
