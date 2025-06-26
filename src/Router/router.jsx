@@ -10,6 +10,7 @@ import AddParcel from "../pages/UserPage/AddParcel";
 import AddParcelForm from "../pages/UserPage/AddParcel";
 import DashBoard from "../layout/DashBoard";
 import MyParcel from "../pages/UserPage/MyParcel";
+import Payment from "../pages/UserPage/Payment";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -44,7 +45,9 @@ export const router = createBrowserRouter([
     path: '/dashboard',
     element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
     children: [
-      {index:true,Component:MyParcel}
+      { index: true, Component: MyParcel },
+      { path: '/dashboard/payment/:parcelId', Component: Payment },
+      
     ]
   }
 ]);

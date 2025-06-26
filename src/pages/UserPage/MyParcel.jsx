@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-query";
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router';
 
 const MyParcel = () => {
     const { user } = useAuth();
@@ -68,11 +69,11 @@ const MyParcel = () => {
           </thead>
           <tbody>
             {parcels?.map((parcel) => (
-              <tr key={parcel._id} className="border-b">
-                <td className="px-4 py-3 capitalize">{parcel.type}</td>
-                <td className="px-4 py-3">৳{parcel.cost}</td>
+              <tr key={parcel?._id} className="border-b">
+                <td className="px-4 py-3 capitalize">{parcel?.type}</td>
+                <td className="px-4 py-3">৳{parcel?.cost}</td>
                 <td className="px-4 py-3">
-                  {new Date(parcel.creation_date).toLocaleDateString("en-GB", {
+                  {new Date(parcel?.creation_date).toLocaleDateString("en-GB", {
                     year: "numeric",
                     month: "short",
                     day: "numeric",
@@ -81,28 +82,34 @@ const MyParcel = () => {
                 <td className="px-4 py-3">
                   <span
                     className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                      parcel.paymentStatus === "paid"
+                      parcel?.paymentStatus === "paid"
                         ? "bg-green-100 text-green-700"
                         : "bg-red-100 text-red-700"
                     }`}
                   >
-                    {parcel.paymentStatus}
+                    {parcel?.paymentStatus}
                   </span>
                 </td>
                 <td className="px-4 py-3 capitalize">
-                  {parcel.deliveryStatus}
+                  {parcel?.deliveryStatus}
                 </td>
                 <td className="px-4 py-3 space-x-2">
-                  {parcel.paymentStatus === "unpaid" && (
-                    <button className="px-2 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700">
+                  {parcel?.paymentStatus === "unpaid" && (
+                    <Link
+                      to={`/dashboard/payment/${parcel?._id}`}
+                      className="px-2 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+                    >
                       Pay
-                    </button>
+                    </Link>
                   )}
                   <button className="px-2 py-1 text-sm bg-gray-100 text-gray-800 rounded hover:bg-gray-200">
                     View
                   </button>
 
-                  <button onClick={()=>handleDelete(parcel._id)} className="px-2 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200">
+                  <button
+                    onClick={() => handleDelete(parcel?._id)}
+                    className="px-2 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200"
+                  >
                     Delete
                   </button>
                 </td>
