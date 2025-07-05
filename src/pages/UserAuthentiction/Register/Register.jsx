@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
-import { imageUrl } from "../../../api/utiles";
+import { imageUrl, setUserInfoInDb } from "../../../api/utiles";
 
 const Register = () => {
   const { newUser, userProfileUpdate } = useAuth();
@@ -22,9 +22,11 @@ const Register = () => {
   const onSubmit = (data) => {
     console.log(data);
     newUser(data?.email, data?.password)
-      .then((res) => {
-        userProfileUpdate(data?.name,image)
+      .then(async(res) => {
+       await userProfileUpdate(data?.name, image)
         console.log(res);
+        console.log(data?.email, data?.name, res?.user?.photoURL);
+       await setUserInfoInDb(data?.email, data?.name, res?.user?.photoURL);
         notify();
         reset();
       })

@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router';
+import { Link, NavLink, Outlet } from 'react-router';
+import { MdLocalShipping, MdPayment, MdTrackChanges } from "react-icons/md";
 
 const DashBoard = () => {
     return (
@@ -51,16 +52,31 @@ const DashBoard = () => {
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             {/* Sidebar items */}
-            <li>DashBoard</li>
+            <h1><Link to={'/'}>Profast</Link></h1>
 
             <li>
-              <NavLink to={'/dashboard'}>MyParcel</NavLink>
+              <NavLink
+                to={"/dashboard/my-parcel"}
+                className="flex items-center gap-2"
+              >
+                <MdLocalShipping /> My Parcel
+              </NavLink>
             </li>
             <li>
-              <a>Profile</a>
+              <NavLink
+                to={"/dashboard/payment-history"}
+                className="flex items-center gap-2"
+              >
+                <MdPayment /> My Payment History
+              </NavLink>
             </li>
             <li>
-              <a>Logout</a>
+              <NavLink
+                to={"/dashboard/track"}
+                className="flex items-center gap-2"
+              >
+                <MdTrackChanges /> Track Package
+              </NavLink>
             </li>
           </ul>
         </div>

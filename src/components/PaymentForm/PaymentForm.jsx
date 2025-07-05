@@ -1,12 +1,42 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { useParams } from 'react-router';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import LoadingSpiner from '../LoadingSpine/LoadingSpiner';
+import { toast } from 'react-toastify';
+import useAuth from '../../hooks/useAuth';
 
 const PaymentForm = () => {
     const stripe = useStripe();
-    const elements = useElements();
+  const elements = useElements();
+  const { user } = useAuth();
     const [error, setError] = useState('');
-    const handelSubmit =async (event) => {
-      event.preventDefault();
+    const { parcelId } = useParams();
+  const axiosSecure = useAxiosSecure()
+  const [prosecting, setProdecting] = useState(false);
+
+    const { isLoading,data:parcelInfo={} } = useQuery({
+      queryKey: ["parcel", parcelId],
+      queryFn: async () => {
+        const res = await axiosSecure.get(`parcels/${parcelId}`);
+        return res.data;
+      },
+    });
+
+    if (isLoading) {
+        return <LoadingSpiner></LoadingSpiner>
+    }
+
+    const amount = parcelInfo.cost;
+    console.log(parcelInfo);
+
+
+    
+  const handelSubmit = async (event) => {
+  
+    event.preventDefault();
+    setProdecting(true)
 
       if (!stripe || !elements) {
         // Stripe.js has not loaded yet. Make sure to disable
@@ -35,8 +65,55 @@ const PaymentForm = () => {
         setError(error.message)
     } else {
         setError('')
-        console.log('[PaymentMethod]', paymentMethod);
+      console.log('[PaymentMethod]', paymentMethod);
+
+    }
+    
+
+    // payment intent
+
+    const res = await axiosSecure.post(`/create-payment-intent/${parcelId}`, {
+      amount
+    });
+    console.log(res);
+    const clientSecret = res?.data?.clientSecret;
+
+    // confirm payment 
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+        billing_details: {
+          name: user?.displayName,
+          email: user?.email,
+
+        }
+      },
+    });
+
+    if (result.error) {
+      setError(result.error.message);
+    } else {
+      setError('')
+      if (result.paymentIntent.status === "succeeded") {
+        toast.success("Payment Successful!");
+        console.log(result);
+        // Save to MongoDB: e.g., axios.post('/save-order', {paymentIntent: result.paymentIntent})
+
+        const paymentData = {
+          parcelId,
+          email: user?.email,
+          amount,
+          paymentMethod: result?.paymentIntent.payment_method_types,
+          transactionId: result?.paymentIntent.id,
+        };
+
+        const paymentRes = await axiosSecure.post("/save-payment", paymentData);
+        
+        console.log(paymentRes.data);
+
+
       }
+    }
     
 
     }
@@ -70,13 +147,13 @@ const PaymentForm = () => {
           </div>
 
           <button
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition duration-200 disabled:opacity-50"
+            className="w-full bg-primary  text-black font-medium py-2 rounded-lg transition duration-200 disabled:opacity-50"
             type="submit"
-            disabled={!stripe}
+            disabled={!stripe || prosecting}
           >
-            Pay
+            Pay ${amount}
                 </button>
-                <p>{ error}</p>
+                <p className='text-red-600'>{ error}</p>
         </form>
       </div>
     );

@@ -16,3 +16,15 @@ export const imageUrl = async (e) => {
 
     return res?.data?.data?.url
 }
+
+
+// user info set in mongodb
+
+export const setUserInfoInDb = async(email,name,photoURL) => {
+   const res = await axios.post("http://localhost:3000/user", {
+    email,
+    name,
+    photoURL,
+   });
+  console.log(res);
+}

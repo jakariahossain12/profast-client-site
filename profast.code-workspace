@@ -1,10 +1,10 @@
 {
-  "folders": [
-	{
-		"path": "."
-	},
-	{
-		"path": "../profast-server-site"
-	}
-]
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../profast-server-site"
+		}
+	]
 }

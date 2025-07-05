@@ -106,6 +106,11 @@ const MyParcel = () => {
                     View
                   </button>
 
+
+
+
+                  
+
                   <button
                     onClick={() => handleDelete(parcel?._id)}
                     className="px-2 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200"
